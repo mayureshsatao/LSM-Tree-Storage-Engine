@@ -435,15 +435,21 @@ Types: Full (1), First (2), Middle (3), Last (4)
 lsm-tree-engine/
 ├── CMakeLists.txt
 ├── util/
-│   ├── types.h          # Core types, Status, MemTableOptions
-│   └── arena.h          # Arena allocator
+│   ├── types.h              # Core types, Status, options
+│   └── arena.h              # Arena allocator
 ├── memtable/
-│   └── skiplist.h       # Lock-free skip list
+│   └── skiplist.h           # Lock-free skip list
 ├── db/
-│   ├── memtable.h       # MemTable implementation
-│   └── memtable_manager.h  # Rotation & lifecycle management
-└── test/
-│   └── memtable_test.cpp   # Unit tests & benchmarks
+│   ├── memtable.h           # MemTable implementation
+│   └── memtable_manager.h   # Rotation & lifecycle
+├── wal/
+│   ├── wal_format.h         # Record format, CRC32, encoding
+│   ├── wal_writer.h         # Append-only writer with sync policies
+│   ├── wal_reader.h         # Reader with corruption detection
+│   └── wal_manager.h        # Segment management & recovery
+├── test/
+│   ├── memtable_test.cpp
+│   └── wal_test.cpp
 ├── README.md
 └── LICENSE
 ```
