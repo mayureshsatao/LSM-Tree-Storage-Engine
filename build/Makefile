@@ -139,6 +139,19 @@ memtable_test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/memtable_test.dir/build.make CMakeFiles/memtable_test.dir/build
 .PHONY : memtable_test/fast
 
+#=============================================================================
+# Target rules for targets named wal_test
+
+# Build rule for target.
+wal_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 wal_test
+.PHONY : wal_test
+
+# fast build rule for target.
+wal_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wal_test.dir/build.make CMakeFiles/wal_test.dir/build
+.PHONY : wal_test/fast
+
 test/memtable_test.o: test/memtable_test.cpp.o
 .PHONY : test/memtable_test.o
 
@@ -163,6 +176,30 @@ test/memtable_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/memtable_test.dir/build.make CMakeFiles/memtable_test.dir/test/memtable_test.cpp.s
 .PHONY : test/memtable_test.cpp.s
 
+test/wal_test.o: test/wal_test.cpp.o
+.PHONY : test/wal_test.o
+
+# target to build an object file
+test/wal_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wal_test.dir/build.make CMakeFiles/wal_test.dir/test/wal_test.cpp.o
+.PHONY : test/wal_test.cpp.o
+
+test/wal_test.i: test/wal_test.cpp.i
+.PHONY : test/wal_test.i
+
+# target to preprocess a source file
+test/wal_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wal_test.dir/build.make CMakeFiles/wal_test.dir/test/wal_test.cpp.i
+.PHONY : test/wal_test.cpp.i
+
+test/wal_test.s: test/wal_test.cpp.s
+.PHONY : test/wal_test.s
+
+# target to generate assembly for a file
+test/wal_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/wal_test.dir/build.make CMakeFiles/wal_test.dir/test/wal_test.cpp.s
+.PHONY : test/wal_test.cpp.s
+
 # Help Target
 help:
 	@echo "The following are some of the valid targets for this Makefile:"
@@ -173,9 +210,13 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... memtable_test"
+	@echo "... wal_test"
 	@echo "... test/memtable_test.o"
 	@echo "... test/memtable_test.i"
 	@echo "... test/memtable_test.s"
+	@echo "... test/wal_test.o"
+	@echo "... test/wal_test.i"
+	@echo "... test/wal_test.s"
 .PHONY : help
 
 
