@@ -1,0 +1,8 @@
+[
+{
+  "directory": "/Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/build",
+  "command": "/usr/bin/c++  -I/Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wall -Wextra -Wpedantic -Werror -o CMakeFiles/memtable_test.dir/test/memtable_test.cpp.o -c /Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/test/memtable_test.cpp",
+  "file": "/Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/test/memtable_test.cpp",
+  "output": "CMakeFiles/memtable_test.dir/test/memtable_test.cpp.o"
+}
+]
