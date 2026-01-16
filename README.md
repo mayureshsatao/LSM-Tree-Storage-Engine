@@ -74,7 +74,7 @@ Traditional B-tree storage engines suffer from write amplification due to random
 ### Building
 
 ```bash
-git clone https://github.com/yourusername/lsm-tree-engine.git
+git clone https://github.com/mayureshsatao/lsm-tree-engine.git
 cd lsm-tree-engine
 
 mkdir build && cd build
