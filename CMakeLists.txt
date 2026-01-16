@@ -17,14 +17,17 @@ include_directories(${CMAKE_SOURCE_DIR})
 add_library(lsm_core INTERFACE)
 target_include_directories(lsm_core INTERFACE ${CMAKE_SOURCE_DIR})
 
-# Test executable
+# Test executables
 add_executable(memtable_test test/memtable_test.cpp)
-target_link_libraries(memtable_test PRIVATE lsm_core)
-target_link_libraries(memtable_test PRIVATE pthread)
+target_link_libraries(memtable_test PRIVATE lsm_core pthread)
+
+add_executable(wal_test test/wal_test.cpp)
+target_link_libraries(wal_test PRIVATE lsm_core pthread)
 
 # Enable testing
 enable_testing()
 add_test(NAME memtable_test COMMAND memtable_test)
+add_test(NAME wal_test COMMAND wal_test)
 
 # Optional: Build type defaults
 if(NOT CMAKE_BUILD_TYPE)
