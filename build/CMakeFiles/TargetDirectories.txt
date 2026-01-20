@@ -1,5 +1,6 @@
 /Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/build/CMakeFiles/memtable_test.dir
 /Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/build/CMakeFiles/wal_test.dir
+/Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/build/CMakeFiles/sstable_test.dir
 /Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/build/CMakeFiles/test.dir
 /Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/build/CMakeFiles/edit_cache.dir
 /Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/build/CMakeFiles/rebuild_cache.dir

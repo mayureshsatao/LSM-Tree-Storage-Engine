@@ -24,10 +24,14 @@ target_link_libraries(memtable_test PRIVATE lsm_core pthread)
 add_executable(wal_test test/wal_test.cpp)
 target_link_libraries(wal_test PRIVATE lsm_core pthread)
 
+add_executable(sstable_test test/sstable_test.cpp)
+target_link_libraries(sstable_test PRIVATE lsm_core pthread)
+
 # Enable testing
 enable_testing()
 add_test(NAME memtable_test COMMAND memtable_test)
 add_test(NAME wal_test COMMAND wal_test)
+add_test(NAME sstable_test COMMAND sstable_test)
 
 # Optional: Build type defaults
 if(NOT CMAKE_BUILD_TYPE)
