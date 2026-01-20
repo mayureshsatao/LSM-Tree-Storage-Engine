@@ -4,6 +4,7 @@
 #pragma once
 
 #include "util/types.h"
+#include "util/bloom_filter.h"
 #include "sstable/sstable_format.h"
 #include "sstable/block_builder.h"
 #include "db/memtable.h"
@@ -22,6 +23,7 @@ namespace sstable {
 struct SSTableWriteStats {
     size_t data_size = 0;         // Total data block bytes
     size_t index_size = 0;        // Index block bytes
+    size_t bloom_size = 0;        // Bloom filter bytes
     size_t num_entries = 0;       // Total key-value pairs
     size_t num_data_blocks = 0;   // Number of data blocks
     size_t raw_key_size = 0;      // Uncompressed key bytes
@@ -38,6 +40,7 @@ public:
           fd_(-1),
           offset_(0),
           data_block_(options.restart_interval),
+          bloom_builder_(options.bloom_policy),
           closed_(false),
           num_entries_(0),
           min_sequence_(kMaxSequenceNumber),
@@ -85,6 +88,11 @@ public:
         data_block_.Add(internal_key, value);
         num_entries_++;
 
+        // Add user key to bloom filter
+        if (options_.use_bloom_filter) {
+            bloom_builder_.AddKey(key);
+        }
+
         stats_.raw_key_size += key.size();
         stats_.raw_value_size += value.size();
 
@@ -119,8 +127,13 @@ public:
         Status s = WriteIndexBlock(&index_handle);
         if (!s.ok()) return s;
 
+        // Write bloom filter
+        BlockHandle bloom_handle;
+        s = WriteBloomFilter(&bloom_handle);
+        if (!s.ok()) return s;
+
         // Write footer
-        s = WriteFooter(index_handle);
+        s = WriteFooter(index_handle, bloom_handle);
         if (!s.ok()) return s;
 
         // Sync and close
@@ -139,6 +152,7 @@ public:
             stats->num_entries = num_entries_;
             stats->min_seq = min_sequence_;
             stats->max_seq = max_sequence_;
+            stats->bloom_size = stats_.bloom_size;
         }
 
         return Status::OK();
@@ -241,9 +255,27 @@ private:
         return WriteRaw(block_with_trailer);
     }
 
-    Status WriteFooter(const BlockHandle& index_handle) {
+    Status WriteBloomFilter(BlockHandle* handle) {
+        if (!options_.use_bloom_filter || bloom_builder_.NumKeys() == 0) {
+            handle->offset = 0;
+            handle->size = 0;
+            return Status::OK();
+        }
+
+        std::string bloom_data = bloom_builder_.Finish();
+
+        handle->offset = offset_;
+        handle->size = bloom_data.size();
+
+        stats_.bloom_size = bloom_data.size();
+
+        return WriteRaw(bloom_data);
+    }
+
+    Status WriteFooter(const BlockHandle& index_handle, const BlockHandle& bloom_handle) {
         Footer footer;
         footer.index_handle = index_handle;
+        footer.bloom_handle = bloom_handle;
         footer.num_entries = num_entries_;
         footer.min_sequence = min_sequence_;
         footer.max_sequence = max_sequence_;
@@ -290,6 +322,7 @@ private:
 
     BlockBuilder data_block_;
     IndexBlockBuilder index_builder_;
+    BloomFilterBuilder bloom_builder_;
 
     bool closed_;
     size_t num_entries_;

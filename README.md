@@ -436,7 +436,8 @@ lsm-tree-engine/
 ├── CMakeLists.txt
 ├── util/
 │   ├── types.h
-│   └── arena.h
+│   ├── arena.h
+│   └── bloom_filter.h      # NEW: Bloom filter implementation
 ├── memtable/
 │   └── skiplist.h
 ├── db/
@@ -448,13 +449,14 @@ lsm-tree-engine/
 │   ├── wal_reader.h
 │   └── wal_manager.h
 ├── sstable/
-│   ├── sstable_format.h      # Format definitions, varint, BlockHandle, Footer
-│   ├── block_builder.h       # Data block & index block builders
-│   └── sstable_writer.h      # SSTable file writer
+│   ├── sstable_format.h    # UPDATED: Added bloom_handle to Footer
+│   ├── block_builder.h
+│   └── sstable_writer.h    # UPDATED: Builds bloom filter
 ├── test/
 │   ├── memtable_test.cpp
 │   ├── wal_test.cpp
-│   └── sstable_test.cpp
+│   ├── sstable_test.cpp    # Need to rebuild
+│   └── bloom_test.cpp      # NEW
 ├── README.md
 └── LICENSE
 ```

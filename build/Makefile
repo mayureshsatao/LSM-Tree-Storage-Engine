@@ -165,6 +165,43 @@ sstable_test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/sstable_test.dir/build.make CMakeFiles/sstable_test.dir/build
 .PHONY : sstable_test/fast
 
+#=============================================================================
+# Target rules for targets named bloom_test
+
+# Build rule for target.
+bloom_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 bloom_test
+.PHONY : bloom_test
+
+# fast build rule for target.
+bloom_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bloom_test.dir/build.make CMakeFiles/bloom_test.dir/build
+.PHONY : bloom_test/fast
+
+test/bloom_test.o: test/bloom_test.cpp.o
+.PHONY : test/bloom_test.o
+
+# target to build an object file
+test/bloom_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bloom_test.dir/build.make CMakeFiles/bloom_test.dir/test/bloom_test.cpp.o
+.PHONY : test/bloom_test.cpp.o
+
+test/bloom_test.i: test/bloom_test.cpp.i
+.PHONY : test/bloom_test.i
+
+# target to preprocess a source file
+test/bloom_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bloom_test.dir/build.make CMakeFiles/bloom_test.dir/test/bloom_test.cpp.i
+.PHONY : test/bloom_test.cpp.i
+
+test/bloom_test.s: test/bloom_test.cpp.s
+.PHONY : test/bloom_test.s
+
+# target to generate assembly for a file
+test/bloom_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/bloom_test.dir/build.make CMakeFiles/bloom_test.dir/test/bloom_test.cpp.s
+.PHONY : test/bloom_test.cpp.s
+
 test/memtable_test.o: test/memtable_test.cpp.o
 .PHONY : test/memtable_test.o
 
@@ -246,9 +283,13 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... test"
+	@echo "... bloom_test"
 	@echo "... memtable_test"
 	@echo "... sstable_test"
 	@echo "... wal_test"
+	@echo "... test/bloom_test.o"
+	@echo "... test/bloom_test.i"
+	@echo "... test/bloom_test.s"
 	@echo "... test/memtable_test.o"
 	@echo "... test/memtable_test.i"
 	@echo "... test/memtable_test.s"
