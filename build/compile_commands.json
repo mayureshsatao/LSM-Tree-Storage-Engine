@@ -16,5 +16,11 @@
   "command": "/usr/bin/c++  -I/Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wall -Wextra -Wpedantic -Werror -o CMakeFiles/sstable_test.dir/test/sstable_test.cpp.o -c /Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/test/sstable_test.cpp",
   "file": "/Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/test/sstable_test.cpp",
   "output": "CMakeFiles/sstable_test.dir/test/sstable_test.cpp.o"
+},
+{
+  "directory": "/Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/build",
+  "command": "/usr/bin/c++  -I/Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine -O3 -DNDEBUG -std=gnu++17 -arch arm64 -Wall -Wextra -Wpedantic -Werror -o CMakeFiles/bloom_test.dir/test/bloom_test.cpp.o -c /Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/test/bloom_test.cpp",
+  "file": "/Users/mayureshsatao/Documents/GithubRepo/LSM-Tree-Storage-Engine/test/bloom_test.cpp",
+  "output": "CMakeFiles/bloom_test.dir/test/bloom_test.cpp.o"
 }
 ]

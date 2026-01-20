@@ -4,6 +4,7 @@
 #pragma once
 
 #include "util/types.h"
+#include "util/bloom_filter.h"
 #include <cstdint>
 #include <cstring>
 #include <string>
@@ -30,6 +31,10 @@ struct SSTableOptions {
     size_t block_size = kDefaultBlockSize;
     int restart_interval = kDefaultRestartInterval;
     bool verify_checksums = true;
+
+    // Bloom filter settings
+    bool use_bloom_filter = true;
+    BloomFilterPolicy bloom_policy;  // Default: 10 bits/key, ~1% FPR
 };
 
 // Block handle: pointer to a block in the file
@@ -78,6 +83,7 @@ private:
 // Footer: stored at the end of the file
 struct Footer {
     BlockHandle index_handle;
+    BlockHandle bloom_handle;  // Bloom filter location
     uint64_t num_entries = 0;
     SequenceNumber min_sequence = 0;
     SequenceNumber max_sequence = 0;
@@ -92,6 +98,11 @@ struct Footer {
         std::string handle_enc = index_handle.Encode();
         PutFixed32(&result, static_cast<uint32_t>(handle_enc.size()));
         result.append(handle_enc);
+
+        // Bloom filter handle
+        std::string bloom_enc = bloom_handle.Encode();
+        PutFixed32(&result, static_cast<uint32_t>(bloom_enc.size()));
+        result.append(bloom_enc);
 
         // Metadata
         PutFixed64(&result, num_entries);
@@ -125,11 +136,20 @@ struct Footer {
 
         // Decode from start
         p = input.data();
+
+        // Index handle
         uint32_t handle_len = DecodeFixed32(p);
         p += 4;
         Slice handle_slice(p, handle_len);
         if (!index_handle.Decode(&handle_slice)) return false;
         p += handle_len;
+
+        // Bloom filter handle
+        uint32_t bloom_len = DecodeFixed32(p);
+        p += 4;
+        Slice bloom_slice(p, bloom_len);
+        if (!bloom_handle.Decode(&bloom_slice)) return false;
+        p += bloom_len;
 
         num_entries = DecodeFixed64(p); p += 8;
         min_sequence = DecodeFixed64(p); p += 8;
