@@ -152,6 +152,19 @@ wal_test/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/wal_test.dir/build.make CMakeFiles/wal_test.dir/build
 .PHONY : wal_test/fast
 
+#=============================================================================
+# Target rules for targets named sstable_test
+
+# Build rule for target.
+sstable_test: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 sstable_test
+.PHONY : sstable_test
+
+# fast build rule for target.
+sstable_test/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sstable_test.dir/build.make CMakeFiles/sstable_test.dir/build
+.PHONY : sstable_test/fast
+
 test/memtable_test.o: test/memtable_test.cpp.o
 .PHONY : test/memtable_test.o
 
@@ -175,6 +188,30 @@ test/memtable_test.s: test/memtable_test.cpp.s
 test/memtable_test.cpp.s:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/memtable_test.dir/build.make CMakeFiles/memtable_test.dir/test/memtable_test.cpp.s
 .PHONY : test/memtable_test.cpp.s
+
+test/sstable_test.o: test/sstable_test.cpp.o
+.PHONY : test/sstable_test.o
+
+# target to build an object file
+test/sstable_test.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sstable_test.dir/build.make CMakeFiles/sstable_test.dir/test/sstable_test.cpp.o
+.PHONY : test/sstable_test.cpp.o
+
+test/sstable_test.i: test/sstable_test.cpp.i
+.PHONY : test/sstable_test.i
+
+# target to preprocess a source file
+test/sstable_test.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sstable_test.dir/build.make CMakeFiles/sstable_test.dir/test/sstable_test.cpp.i
+.PHONY : test/sstable_test.cpp.i
+
+test/sstable_test.s: test/sstable_test.cpp.s
+.PHONY : test/sstable_test.s
+
+# target to generate assembly for a file
+test/sstable_test.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/sstable_test.dir/build.make CMakeFiles/sstable_test.dir/test/sstable_test.cpp.s
+.PHONY : test/sstable_test.cpp.s
 
 test/wal_test.o: test/wal_test.cpp.o
 .PHONY : test/wal_test.o
@@ -210,10 +247,14 @@ help:
 	@echo "... rebuild_cache"
 	@echo "... test"
 	@echo "... memtable_test"
+	@echo "... sstable_test"
 	@echo "... wal_test"
 	@echo "... test/memtable_test.o"
 	@echo "... test/memtable_test.i"
 	@echo "... test/memtable_test.s"
+	@echo "... test/sstable_test.o"
+	@echo "... test/sstable_test.i"
+	@echo "... test/sstable_test.s"
 	@echo "... test/wal_test.o"
 	@echo "... test/wal_test.i"
 	@echo "... test/wal_test.s"

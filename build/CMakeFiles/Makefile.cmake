@@ -50,4 +50,5 @@ set(CMAKE_MAKEFILE_PRODUCTS
 set(CMAKE_DEPEND_INFO_FILES
   "CMakeFiles/memtable_test.dir/DependInfo.cmake"
   "CMakeFiles/wal_test.dir/DependInfo.cmake"
+  "CMakeFiles/sstable_test.dir/DependInfo.cmake"
   )
